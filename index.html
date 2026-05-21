@@ -1,161 +1,174 @@
 <!DOCTYPE html>
+<!-- 
+     LANG : Définit la langue du document pour les moteurs de recherche et les lecteurs d'écran. 
+-->
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <!-- VIEWPORT : Crucial pour le responsive. Assure que le site s'affiche bien sur mobile. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Portfolio - Fabrice ANSEL | DWWM AFPA</title>
+    <title>Fabrice ANSEL | Portfolio DWWM</title>
 
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Lien vers Google Fonts pour les polices modernes 
-     - Poppins : Police pour les textes.
-     - Roboto Mono : Police pour le code (monospace).
-     -->
+    <!-- Google Fonts : Poppins pour le côté moderne et élégant. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome : Bibliothèque d'icônes incontournable. -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
+    <!-- Notre fichier de style personnalisé. -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <header class="header">
-        <div class="container">
-            <a href="#" class="logo">
-                <i class="fas fa-code"></i> Fabrice ANSEL
-            </a>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="#accueil" class="nav-link">Accueil</a></li>
-                    <li><a href="#apprentissage" class="nav-link">Apprentissage</a></li>
-                    <li><a href="#blog" class="nav-link">Blog</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <!-- BOUTONS : Mode claire/sombre + Menu burger -->
-                 <div class="header-buttons">
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Bascler le thème">
-                        <i class="fas fa-moon"></i><!-- Icône lune -->
-                    </button>
-                    <!-- Bouton menu burger pour les petits écrans -->
-                    <button class="burger-menu" aria-label="Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                 </div>
-            </nav>
-        </div>
+    <!-- 
+         HEADER : Utilise la classe 'glass' pour l'effet de transparence moderne. 
+         ROLE="BANNER" : Aide à l'accessibilité.
+    -->
+    <header class="header glass" role="banner">
+        <a href="#" class="logo" style="text-decoration: none; color: inherit; font-weight: 700;">
+            <i class="fas fa-terminal"></i> Fabrice.dev
+        </a>
+        
+        <!-- MENU BURGER : Apparaît uniquement sur mobile. -->
+        <button class="burger-menu" aria-label="Ouvrir le menu" style="display: none; background: none; border: none; cursor: pointer; font-size: 1.5rem; color: inherit;">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav id="nav-menu" role="navigation">
+            <ul class="nav-list">
+                <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="#parcours" class="nav-link">Parcours</a></li>
+                <li><a href="#competences" class="nav-link">Compétences</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- BOUTON THÈME : Permet de basculer entre clair et sombre. -->
+        <button id="theme-toggle" class="btn-theme" aria-label="Changer le thème" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; color: inherit;">
+            <i class="fas fa-moon"></i>
+        </button>
     </header>
 
     <main>
+        <!-- 
+             SECTION HERO : La première chose que voit le visiteur. 
+             ID="ACCUEIL" : Utilisé pour les ancres de navigation.
+        -->
         <section id="accueil" class="hero">
             <div class="container">
-                <h1>Bienvenue sur mon Portfolio</h1>
-                <h2>Développeur Web en Formation à l'AFPA</h2>
-                <p class="hero-text">
-                    Je suis Fabrice ANSEL, développeur web en formation à l'AFPA. Découvrez mes projets, mon parcours et mes compétences.
-                </p>
-                <p id="countdown" class="countdown"></p>
-                <div class="cta-buttons">
-                    <a href="#apprentissage" class="btn btn-primary">Voir mes projets</a>
-                    <a href="#blog" class="btn btn-secondary">Lire mon blog</a>
-                </div>
-            </div>
-        </section>
-    
-        <section id="apprentissage" class="section">
-            <div class="container">
-                <h2 class="section-title">Mon Apprentissage</h2>
-                <div class="skills-grid">
-                    <!-- Carte HTML -->
-                    <div class="skills-card">
-                        <div class="skill-icon html">
-                            <i class="fab fa-html5"></i>
-                        </div>
-                        <h3>HTML5</h3>
-                        <p>Structure sémantique, accessibilité et bonnes pratiques</p>
+                <div class="reveal">
+                    <h1>Futur Développeur Web <br><span>à l'AFPA Mulhouse</span></h1>
+                    <p>Passionné par la création numérique, je prépare mon entrée en formation DWWM. Bienvenue dans mon univers d'apprentissage et de partage.</p>
+                    
+                    <!-- COMPTEUR : Géré par JavaScript pour créer une attente. -->
+                    <div id="countdown" class="glass" style="display: inline-block; padding: 1rem 2rem; margin-bottom: 2rem; font-weight: 600;">
+                        Chargement du compte à rebours...
                     </div>
-                    <!-- Carte CSS -->
-                    <div class="skills-card">
-                        <div class="skill-icon css">
-                            <i class="fab fa-css3-alt"></i>
-                        </div>
-                        <h3>CSS3</h3>
-                        <p>Flexbox, Grid, animations et responsive design</p>
+
+                    <div class="cta-buttons">
+                        <a href="#parcours" class="btn btn-primary">Découvrir mon parcours</a>
+                        <a href="#contact" class="btn-secondary" style="margin-left: 1rem; text-decoration: none; color: var(--text-muted); font-weight: 500;">Me contacter</a>
                     </div>
-                    <!-- Carte PHP -->
-                    <div class="skills-card">
-                        <div class="skill-icon php">
-                            <i class="fab fa-php"></i>
-                        </div>
-                        <h3>PHP</h3>
-                        <p>Backend et gestion de formulaires.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Section Blog -->
-        <section id="blog" class="section bg-light">
-            <div class="container">
-                <h2 class="section-title">Mon journal de bord</h2>
-                <div class="blog-grid">
-                    <!-- Article 1 -->
-                    <article class="blog-card">
-                        <div class="blog-date">
-                            <span class="day">21</span>
-                            <span class="month">Mai</span>
-                        </div>
-                        <div class="blog-content">
-                            <h3>Début de mon portfolio</h3>
-                            <p>Je commence à structurer mon portfolio avec un design moderne et des fonctionnalités utiles.</p>
-                            <a href="#" class="btn btn-small">Lire la suite</a>
-                        </div>
-                    </article>
-                    <!-- Article 2 -->
-                    <article class="blog-post">
-                        <h3>Apprendre le HTML et le CSS</h3>
-                        <p>Mes conseils et ressources pour maîtriser les bases du développement web.</p>
-                        <a href="#" class="read-more">Lire l'article</a>
-                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- Section Contact -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="section-title">Contacter-moi</h2>
-                <form class="contact-form">
+        <!-- 
+             SECTION PARCOURS (Timeline) : Montre l'évolution de l'apprentissage.
+        -->
+        <section id="parcours" class="container">
+            <h2 class="section-title reveal">Mon Chemin vers le Code</h2>
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <h3>Découverte & Auto-formation</h3>
+                    <p style="color: var(--text-muted);">Apprentissage des bases du HTML5 et CSS3 via des plateformes en ligne. Création de mes premières pages statiques.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Exploration JavaScript & PHP</h3>
+                    <p style="color: var(--text-muted);">Introduction à la logique de programmation, manipulation du DOM et bases du backend.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Objectif AFPA Mulhouse (Octobre 2026)</h3>
+                    <p style="color: var(--text-muted);">Entrée en formation Développeur Web et Web Mobile pour professionnaliser mes compétences.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+             SECTION COMPÉTENCES : Grille moderne de ce que je maîtrise.
+        -->
+        <section id="competences" class="container">
+            <h2 class="section-title reveal">Mes Outils de Prédilection</h2>
+            <div class="skills-grid">
+                <!-- Chaque skill-card est un 'article' sémantiquement parlant. -->
+                <article class="skill-card glass reveal">
+                    <i class="fab fa-html5 skill-icon" style="color: #e34f26;"></i>
+                    <h3>HTML5</h3>
+                    <p>Structure sémantique, accessibilité (ARIA) et SEO technique.</p>
+                </article>
+
+                <article class="skill-card glass reveal">
+                    <i class="fab fa-css3-alt skill-icon" style="color: #1572b6;"></i>
+                    <h3>CSS3 & Design</h3>
+                    <p>Flexbox, CSS Grid, Responsive Design et animations modernes.</p>
+                </article>
+
+                <article class="skill-card glass reveal">
+                    <i class="fab fa-js skill-icon" style="color: #f7df1e;"></i>
+                    <h3>JavaScript</h3>
+                    <p>Manipulation du DOM, requêtes API et ES6+.</p>
+                </article>
+
+                <article class="skill-card glass reveal">
+                    <i class="fab fa-php skill-icon" style="color: #777bb4;"></i>
+                    <h3>PHP</h3>
+                    <p>Logique serveur, gestion de formulaires et bases de données.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- 
+             SECTION CONTACT : Formulaire épuré et moderne.
+        -->
+        <section id="contact" class="container">
+            <div class="glass reveal" style="padding: 4rem; border-radius: var(--radius);">
+                <h2 class="section-title" style="margin-bottom: 2rem;">Travaillons Ensemble</h2>
+                <form class="contact-container">
                     <div class="form-group">
-                        <label for="nom">Nom</label>
-                        <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                        <label for="name">Votre Nom</label>
+                        <input type="text" id="name" class="form-control" placeholder="Ex: Jean Dupont" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Votre email" required>
+                        <label for="email">Votre Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Ex: jean@exemple.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+                        <label for="message">Votre Message</label>
+                        <textarea id="message" class="form-control" rows="5" placeholder="Parlez-moi de votre projet..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
                 </form>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
+    <!-- 
+         FOOTER : Bas de page standard mais élégant.
+    -->
+    <footer style="text-align: center; padding: 4rem 0; color: var(--text-muted);">
         <div class="container">
-            <p>&copy; 2026 - Fabrice ANSEL | Portfolio DWWM</p>
+            <p>&copy; 2026 - Fabrice ANSEL | Réalisé avec passion pour l'AFPA</p>
+            <div style="margin-top: 1rem; font-size: 1.5rem; gap: 1rem; display: flex; justify-content: center;">
+                <a href="#" style="color: inherit;"><i class="fab fa-github"></i></a>
+                <a href="#" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
     </footer>
 
-    <!-- SCRIPTS : Lien vers le fichier JavaScript.
-    - Placé avant la fermeture de la balise body pour un chargement rapide -->
-
+    <!-- SCRIPTS : Chargés à la fin pour ne pas bloquer le rendu visuel. -->
     <script src="js/script.js"></script>
-
 </body>
 </html>

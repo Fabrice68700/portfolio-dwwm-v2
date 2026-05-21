@@ -1,163 +1,144 @@
 /**
- * =============================================
- * SCRIPT PRINCIPAL
- * =============================================
- * Ce fichier contient toute la logique JavaScript du site :
- * - Basculer entre le mode clair et sombre.
- * - Compteur de jours avant la formation.
- * - Menu burger pour mobile.
- * - Scroll fluide pour les ancres.
- * =============================================
+ * ==========================================================================
+ * LOGIQUE JAVASCRIPT - PORTFOLIO INTERACTIF
+ * ==========================================================================
+ * Ce fichier gère l'interactivité : animations au scroll, thème et compte à rebours.
+ * Chaque fonction est expliquée pour t'aider dans ton apprentissage.
+ * ==========================================================================
  */
 
-/**
- * =============================================
- * ATTENDRE QUE LE DOM SOIT CHARGÉ
- * =============================================
- * On attend que le HTML soit entièrement chargé avant d'exécuter le JS.
- * Cela évite les erreurs du type "Element not found".
- * =============================================
- */
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialise toutes les fonctionnalités
-    initThemeToggle();
-    initCountdown();
-    initBurgerMenu();
-    initSmoothScroll();
+// On attend que tout le HTML soit chargé avant de lancer le script.
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();          // Gestion du mode sombre/clair
+    initReveal();         // Animations au défilement
+    initCountdown();      // Compte à rebours AFPA
+    initBurgerMenu();     // Menu mobile
 });
 
 /**
- * =============================================
- * FONCTION : TOGGLE THÈME (CLAIR/SOMBRE)
- * =============================================
- * Bascule entre le mode clair et sombre en cliquant sur le bouton.
- * =============================================
- */
-function initThemeToggle() {
-    // Sélectionne le bouton de bascule de thème
-    const themeToggle = document.getElementById('theme-toggle');
-
-    // Vérifie si le bouton existe
-    if (!themeToggle) {
-        console.error("Le bouton #theme-toggle n'existe pas !");
-        return;
-    }
-
-    // Vérifie si un thème est déjà enregistré dans le localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Icône soleil (mode clair)
-    }
-
-    // Ajoute un écouteur d'événement au clic sur le bouton
-    themeToggle.addEventListener('click', function() {
-        // Bascule la classe 'dark-mode' sur le <body>
-        document.body.classList.toggle('dark-mode');
-
-        // Change l'icône du bouton
-        if (document.body.classList.contains('dark-mode')) {
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Mode sombre activé → icône soleil
-            localStorage.setItem('theme', 'dark'); // Enregistre le thème dans le localStorage
-        } else {
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Mode clair activé → icône lune
-            localStorage.setItem('theme', 'light'); // Enregistre le thème dans le localStorage
-        }
-    });
-}
-
-/**
- * =============================================
- * FONCTION : COMPTEUR DE JOURS
- * =============================================
- * Affiche le nombre de jours restants avant le début de la formation (20 octobre 2026).
- * =============================================
- */
-function initCountdown() {
-    // Sélectionne l'élément où afficher le compteur
-    const countdownElement = document.getElementById('countdown');
-
-    // Vérifie si l'élément existe
-    if (!countdownElement) {
-        console.error("L'élément #countdown n'existe pas !");
-        return;
-    }
-
-    // Date de début de la formation (20 octobre 2026)
-    const startDate = new Date('2026-10-20T00:00:00');
-
-    // Fonction pour calculer et afficher le compteur
-    function updateCountdown() {
-        const today = new Date();
-        const diffTime = startDate - today;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Convertit les millisecondes en jours
-
-        // Affiche le résultat dans l'élément
-        countdownElement.textContent = `Il reste ${diffDays} jours avant le début de la formation DWWM !`;
-    }
-
-    // Met à jour le compteur immédiatement
-    updateCountdown();
-
-    // Met à jour le compteur toutes les 24 heures (pour éviter les erreurs si la page reste ouverte)
-    setInterval(updateCountdown, 24 * 60 * 60 * 1000);
-}
-
-/**
- * =============================================
- * FONCTION : MENU BURGER (MOBILE)
- * =============================================
- * Affiche/masque le menu de navigation sur mobile.
- * =============================================
+ * 0. MENU BURGER (Mobile)
  */
 function initBurgerMenu() {
-    // Sélectionne le bouton menu burger et la navigation
-    const burgerMenu = document.querySelector('.burger-menu');
-    const nav = document.querySelector('.nav');
+    const burger = document.querySelector('.burger-menu');
+    const nav = document.querySelector('#nav-menu');
+    const links = document.querySelectorAll('.nav-link');
 
-    // Vérifie si les éléments existent
-    if (!burgerMenu || !nav) {
-        console.error("Le bouton .burger-menu ou la nav .nav n'existe pas !");
-        return;
-    }
+    if (!burger || !nav) return;
 
-    // Ajoute un écouteur d'événement au clic sur le bouton
-    burgerMenu.addEventListener('click', function() {
-        nav.classList.toggle('active'); // Bascule la classe 'active' sur la nav
+    burger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        // Change l'icône entre bars et times (X)
+        const icon = burger.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
     });
 
-    // NOUVEAU : Ferme le menu quand on clique sur un lien
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function() {
-            nav.classList.remove('active'); // Ferme le menu
+    // Ferme le menu quand on clique sur un lien
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            const icon = burger.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
         });
     });
 }
 
 /**
- * =============================================
- * FONCTION : SCROLL FLUIDE
- * =============================================
- * Permet de scroller en douceur vers les sections quand on clique sur un lien d'ancre.
- * =============================================
+ * 1. GESTION DU THÈME (Dark Mode)
+ * Pourquoi ? Offrir un confort visuel et montrer qu'on sait gérer l'état local.
  */
-function initSmoothScroll() {
-    // Sélectionne tous les liens qui commencent par #
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        // Ajoute un écouteur d'événement au clic
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault(); // Empêche le comportement par défaut (scroll brutal)
+function initTheme() {
+    const themeBtn = document.querySelector('#theme-toggle');
+    const icon = themeBtn.querySelector('i');
+    
+    // On récupère le thème sauvegardé ou on utilise 'light' par défaut.
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    // On applique le thème au chargement.
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateIcon(currentTheme);
 
-            // Récupère l'ID de la section cible
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+    themeBtn.addEventListener('click', () => {
+        // Bascule entre 'light' et 'dark'.
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        
+        // On met à jour l'attribut HTML et on sauvegarde.
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        updateIcon(newTheme);
+    });
 
-            // Si la section existe, scroll vers elle en douceur
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth' // Animation fluide
-                });
+    function updateIcon(theme) {
+        if (theme === 'dark') {
+            icon.classList.replace('fa-moon', 'fa-sun'); // On montre le soleil pour repasser en clair
+        } else {
+            icon.classList.replace('fa-sun', 'fa-moon'); // On montre la lune pour repasser en sombre
+        }
+    }
+}
+
+/**
+ * 2. ANIMATIONS AU DÉFILEMENT (Intersection Observer)
+ * Pourquoi ? C'est beaucoup plus performant que d'écouter l'événement 'scroll'.
+ */
+function initReveal() {
+    // On sélectionne tous les éléments ayant la classe .reveal
+    const reveals = document.querySelectorAll('.reveal');
+
+    // L'observateur va détecter quand l'élément entre dans la "fenêtre" (viewport).
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Si l'élément est visible à au moins 10%
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // On peut arrêter d'observer l'élément une fois qu'il est apparu.
+                observer.unobserve(entry.target);
             }
         });
+    }, {
+        threshold: 0.1 // 10% de l'élément doit être visible
+    });
+
+    reveals.forEach(reveal => {
+        observer.observe(reveal);
     });
 }
+
+/**
+ * 3. COMPTE À REBOURS (Objectif AFPA)
+ * Pourquoi ? Créer un engagement et montrer qu'on sait manipuler les dates en JS.
+ */
+function initCountdown() {
+    const display = document.querySelector('#countdown');
+    if (!display) return;
+
+    // Date cible : 20 Octobre 2026
+    const targetDate = new Date('October 20, 2026 09:00:00').getTime();
+
+    // On met à jour toutes les secondes.
+    const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        // Calcul des jours, heures, minutes, secondes.
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (diff < 0) {
+            clearInterval(timer);
+            display.innerHTML = "La formation a commencé ! 🚀";
+        } else {
+            display.innerHTML = `J - ${days}j ${hours}h ${minutes}m ${seconds}s avant l'AFPA`;
+        }
+    }, 1000);
+}
+
+/**
+ * CONSEIL PÉDAGOGIQUE :
+ * En JavaScript, utilise 'const' pour les variables qui ne changent pas, 
+ * et 'let' pour celles qui seront modifiées. Évite 'var' (obsolète).
+ */
