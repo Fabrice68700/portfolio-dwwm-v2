@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfolio - Fabrice ANSEL | DWWM AFPA</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Lien vers Google Fonts pour les polices modernes 
+     - Poppins : Police pour les textes.
+     - Roboto Mono : Police pour le code (monospace).
+     -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-code"></i> Fabrice ANSEL
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                    <li><a href="#apprentissage" class="nav-link">Apprentissage</a></li>
+                    <li><a href="#blog" class="nav-link">Blog</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <!-- BOUTONS : Mode claire/sombre + Menu burger -->
+                 <div class="header-buttons">
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Bascler le thème">
+                        <i class="fas fa-moon"></i><!-- Icône lune -->
+                    </button>
+                    <!-- Menu burger pour les petits écrans -->
+                    <button id="burger-menu" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                 </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="accueil" class="hero">
+            <div class="container">
+                <h1>Bienvenue sur mon Portfolio</h1>
+                <h2>Développeur Web en Formation à l'AFPA</h2>
+                <p class="hero-text">
+                    Je suis Fabrice ANSEL, développeur web en formation à l'AFPA. Découvrez mes projets, mon parcours et mes compétences.
+                </p>
+                <p id="countdown" class="countdown"></p>
+                <div class="cta-buttons">
+                    <a href="#apprentissage" class="btn btn-primary">Voir mes projets</a>
+                    <a href="#blog" class="btn btn-secondary">Lire mon blog</a>
+                </div>
+            </div>
+        </section>
+    
+        <section id="apprentissage" class="section">
+            <div class="container">
+                <h2 class="section-title">Mon Apprentissage</h2>
+                <div class="skills-grid">
+                    <!-- Carte HTML -->
+                    <div class="skills-card">
+                        <div class="skill-icon html">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h3>HTML5</h3>
+                        <p>Structure sémantique, accessibilité et bonnes pratiques</p>
+                    </div>
+                    <!-- Carte CSS -->
+                    <div class="skills-card">
+                        <div class="skill-icon css">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <h3>CSS3</h3>
+                        <p>Flexbox, Grid, animations et responsive design</p>
+                    </div>
+                    <!-- Carte PHP -->
+                    <div class="skills-card">
+                        <div class="skill-icon php">
+                            <i class="fab fa-php"></i>
+                        </div>
+                        <h3>PHP</h3>
+                        <p>Backend et gestion de formulaires.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section Blog -->
+        <section id="blog" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Mon journal de bord</h2>
+                <div class="blog-grid">
+                    <!-- Article 1 -->
+                    <article class="blog-card">
+                        <div class="blog-date">
+                            <span class="day">21</span>
+                            <span class="month">Mai</span>
+                        </div>
+                        <div class="blog-content">
+                            <h3>Début de mon portfolio</h3>
+                            <p>Je commence à structurer mon portfolio avec un design moderne et des fonctionnalités utiles.</p>
+                            <a href="#" class="btn btn-small">Lire la suite</a>
+                        </div>
+                    </article>
+                    <!-- Article 2 -->
+                    <article class="blog-post">
+                        <h3>Apprendre le HTML et le CSS</h3>
+                        <p>Mes conseils et ressources pour maîtriser les bases du développement web.</p>
+                        <a href="#" class="read-more">Lire l'article</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Contacter-moi</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 - Fabrice ANSEL | Portfolio DWWM</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS : Lien vers le fichier JavaScript.
+    - Placé avant la fermeture de la balise body pour un chargement rapide -->
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
