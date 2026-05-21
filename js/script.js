@@ -125,6 +125,13 @@ function initBurgerMenu() {
     burgerMenu.addEventListener('click', function() {
         nav.classList.toggle('active'); // Bascule la classe 'active' sur la nav
     });
+
+    // NOUVEAU : Ferme le menu quand on clique sur un lien
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('active'); // Ferme le menu
+        });
+    });
 }
 
 /**

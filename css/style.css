@@ -199,6 +199,7 @@ body {
     color: var(--primary-color);
     margin-bottom: 2rem;
     font-weight: 600;
+    text-align: center; /* Centrage du texte */
 }
 
 .cta-buttons {
@@ -290,6 +291,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    justify-items: center; /* Centrage horizontal des cartes */
 }
 
 .skill-card {
