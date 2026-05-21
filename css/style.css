@@ -137,10 +137,16 @@ body {
     font-size: 1.2rem;
     color: var(--secondary-color);
     transition: color 0.3s ease;
+    padding: 0.5rem;
 }
 
 .theme-toggle:hover {
     color: var(--primary-color);
+}
+
+/* Assure que l'icône est toujours visible */
+.theme-toggle i {
+    display: inline-block;
 }
 
 /* Menu burger (masqué par défaut sur desktop) */
@@ -150,6 +156,7 @@ body {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
+    z-index: 1001; /* Doit être au-dessus du header */
 }
 
 .burger-menu span {
@@ -546,6 +553,11 @@ body.dark-mode .footer {
         display: block;
     }
 
+    /* Masque la navigation desktop sur mobile */
+    .nav-list {
+        display: none;
+    }
+
     /* Style du menu mobile */
     .nav.active .nav-list {
         display: flex;
@@ -560,8 +572,14 @@ body.dark-mode .footer {
         gap: 0;
     }
 
+    /* Style des liens dans le menu mobile */
+    .nav.active .nav-list li {
+        margin: 0.5rem 0;
+    }
+
     .nav.active {
         position: relative;
+        width: 100%;
     }
 
     /* Grilles en une seule colonne sur mobile */
